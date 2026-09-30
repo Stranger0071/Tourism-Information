@@ -1,5 +1,7 @@
 package com.example.tourisminformation.model;
 
+import java.util.List;
+
 public record BookingOption(
 		String id,
 		String title,
@@ -8,4 +10,8 @@ public record BookingOption(
 		String duration,
 		String description,
 		String link,
-		String badge) {}
+		String badge,
+		int minDays,
+		int maxDays,
+		int defaultDays,
+		List<String> relatedHotelIds) {}

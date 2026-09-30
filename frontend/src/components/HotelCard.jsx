@@ -1,4 +1,5 @@
 import SafeImage from './SafeImage';
+import HotelAvailability from './HotelAvailability';
 import './HotelCard.css';
 
 export default function HotelCard({ hotel }) {
@@ -24,14 +25,7 @@ export default function HotelCard({ hotel }) {
         </ul>
         {hotel.note && <p className="hotel-note">{hotel.note}</p>}
         <div className="hotel-actions">
-          <a
-            href={hotel.bookingUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-saffron"
-          >
-            Check availability
-          </a>
+          <HotelAvailability hotel={hotel} />
         </div>
       </div>
     </article>

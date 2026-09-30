@@ -27,6 +27,25 @@ pipeline {
             }
         }
 
+        stage('Security — OWASP Dependency-Check') {
+            steps {
+                dir('tourisminformation') {
+                    sh '''
+                        if command -v dependency-check.sh >/dev/null 2>&1; then
+                            dependency-check.sh --project "tourisminformation" --scan "." --format "HTML" --format "JSON" --failOnCVSS 7.0 --out "."
+                        else
+                            ./mvnw org.owasp:dependency-check-maven:check -DfailBuildOnCVSS=7.0 -B
+                        fi
+                    '''
+                }
+            }
+            post {
+                always {
+                    archiveArtifacts artifacts: 'tourisminformation/dependency-check-report.html,tourisminformation/target/dependency-check-report.html', allowEmptyArchive: true
+                }
+            }
+        }
+
         stage('Docker — Build Images') {
             parallel {
                 stage('Backend Image') {
@@ -46,6 +65,23 @@ pipeline {
             }
         }
 
+        stage('Security — Trivy Image Scan') {
+            steps {
+                sh """
+                    if command -v trivy >/dev/null 2>&1; then
+                        echo "Scanning ${BACKEND_IMAGE}:${IMAGE_TAG} for HIGH/CRITICAL vulnerabilities..."
+                        trivy image --exit-code 1 --severity HIGH,CRITICAL ${BACKEND_IMAGE}:${IMAGE_TAG}
+
+                        echo "Scanning ${FRONTEND_IMAGE}:${IMAGE_TAG} for HIGH/CRITICAL vulnerabilities..."
+                        trivy image --exit-code 1 --severity HIGH,CRITICAL ${FRONTEND_IMAGE}:${IMAGE_TAG}
+                    else
+                        echo "Trivy CLI is not installed on the build agent."
+                        exit 1
+                    fi
+                """
+            }
+        }
+
         stage('Docker — Smoke Test') {
             steps {
                 sh '''
@@ -53,7 +89,7 @@ pipeline {
                     docker compose up -d --build
                     sleep 15
                     curl -sf http://localhost:8081/api/health
-                    curl -sf http://localhost:80/ | head -c 200
+                    curl -sf http://localhost:8088/ | head -c 200
                 '''
             }
             post {
@@ -69,7 +105,7 @@ pipeline {
             echo "Build ${IMAGE_TAG} completed — images: ${BACKEND_IMAGE}, ${FRONTEND_IMAGE}"
         }
         failure {
-            echo 'Pipeline failed. Check backend tests, frontend build, or Docker logs.'
+            echo 'Pipeline failed. Check backend tests, dependency scan, Trivy image scan, or Docker logs.'
         }
         cleanup {
             cleanWs()

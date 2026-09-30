@@ -1,0 +1,52 @@
+apiVersion: 1
+
+groups:
+  - orgId: 1
+    name: SecurityAlerts
+    folder: Security Audit
+    interval: 1m
+    rules:
+      - uid: burst_failed_logins_alert
+        title: Burst of Failed Logins Alert
+        condition: C
+        data:
+          - refId: A
+            relativeTimeRange:
+              from: 300
+              to: 0
+            datasourceUid: Graphite
+            model:
+              target: 'stats.counters.audit.login.failure.count'
+              refId: A
+          - refId: B
+            relativeTimeRange:
+              from: 300
+              to: 0
+            datasourceUid: __expr__
+            model:
+              type: reduce
+              reducer: sum
+              expression: A
+              refId: B
+          - refId: C
+            relativeTimeRange:
+              from: 300
+              to: 0
+            datasourceUid: __expr__
+            model:
+              type: threshold
+              expression: B
+              conditions:
+                - evaluator:
+                    type: gt
+                    params: [5]
+              refId: C
+        noDataState: OK
+        execErrState: Alerting
+        for: 1m
+        annotations:
+          summary: Burst of Failed Logins Detected
+          description: More than 5 failed login attempts detected in the last 5 minutes.
+        labels:
+          severity: critical
+          category: security

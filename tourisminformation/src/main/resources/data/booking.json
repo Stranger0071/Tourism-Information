@@ -8,7 +8,11 @@
       "duration": "1–3 hours recommended",
       "description": "Sunrise rides include the floating vegetable market (before 8 AM). Book through your houseboat or at Dal Gate counter.",
       "link": "https://booking.com",
-      "badge": "Popular"
+      "badge": "Popular",
+      "minDays": 1,
+      "maxDays": 3,
+      "defaultDays": 1,
+      "relatedHotelIds": ["houseboat-pearl", "heritage-ahdoos"]
     },
     {
       "id": "gondola",
@@ -18,7 +22,11 @@
       "duration": "Half day",
       "description": "Phase 1: Gulmarg to Kongdoori. Phase 2: Kongdoori to Apharwat Peak. Tickets at counter — arrive before 10 AM in peak season.",
       "link": "https://makemytrip.com",
-      "badge": "Seasonal"
+      "badge": "Seasonal",
+      "minDays": 1,
+      "maxDays": 5,
+      "defaultDays": 2,
+      "relatedHotelIds": ["gulmarg-highland"]
     },
     {
       "id": "trek",
@@ -28,7 +36,11 @@
       "duration": "Full day",
       "description": "Includes guide fee only. Pony charges extra at Sonamarg. Verify guide ID card issued by Tourism Department.",
       "link": "https://goibibo.com",
-      "badge": null
+      "badge": null,
+      "minDays": 1,
+      "maxDays": 7,
+      "defaultDays": 3,
+      "relatedHotelIds": ["pahalgam-retreat", "sonamarg-camp"]
     },
     {
       "id": "package",
@@ -38,7 +50,11 @@
       "duration": "4 days",
       "description": "Typically covers houseboat, Gulmarg day trip, Mughal gardens, and airport transfer. Ask for operator registration number.",
       "link": "https://makemytrip.com",
-      "badge": "Package"
+      "badge": "Package",
+      "minDays": 2,
+      "maxDays": 10,
+      "defaultDays": 4,
+      "relatedHotelIds": ["houseboat-pearl", "hotel-grand-kashmir", "heritage-ahdoos"]
     },
     {
       "id": "rafting",
@@ -48,7 +64,11 @@
       "duration": "1–2 hours",
       "description": "Seasonal — usually May to August when water levels permit. Grade II–III stretches near Pahalgam.",
       "link": "https://booking.com",
-      "badge": "Seasonal"
+      "badge": "Seasonal",
+      "minDays": 1,
+      "maxDays": 4,
+      "defaultDays": 2,
+      "relatedHotelIds": ["pahalgam-retreat"]
     },
     {
       "id": "houseboat",
@@ -58,7 +78,11 @@
       "duration": "Overnight",
       "description": "Category A/B/C houseboats on Dal and Nigeen lakes. Insist on HTC registration. Meals often included — confirm in advance.",
       "link": "https://booking.com",
-      "badge": "Popular"
+      "badge": "Popular",
+      "minDays": 1,
+      "maxDays": 14,
+      "defaultDays": 3,
+      "relatedHotelIds": ["houseboat-pearl"]
     }
   ],
   "partners": [

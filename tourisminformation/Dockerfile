@@ -11,10 +11,10 @@ RUN ./mvnw package -DskipTests -B
 FROM eclipse-temurin:25-jre-alpine
 WORKDIR /app
 
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
-USER appuser
+RUN addgroup -g 10001 -S appgroup && adduser -u 10001 -S appuser -G appgroup
+USER 10001:10001
 
-COPY --from=build /app/target/tourisminformation-*.jar app.jar
+COPY --from=build --chown=10001:10001 /app/target/tourisminformation-*.jar app.jar
 
 EXPOSE 8081
 

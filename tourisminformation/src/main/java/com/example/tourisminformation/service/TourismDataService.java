@@ -2,6 +2,7 @@ package com.example.tourisminformation.service;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.tourisminformation.model.Attraction;
 import com.example.tourisminformation.model.BookingData;
+import com.example.tourisminformation.model.BookingOption;
 import com.example.tourisminformation.model.Distance;
 import com.example.tourisminformation.model.Guide;
 import com.example.tourisminformation.model.Hotel;
@@ -25,9 +27,9 @@ import jakarta.annotation.PostConstruct;
 public class TourismDataService {
 
 	private final ObjectMapper objectMapper;
-	private List<Attraction> attractions;
-	private List<Hotel> hotels;
-	private List<Guide> guides;
+	private List<Attraction> attractions = new ArrayList<>();
+	private List<Hotel> hotels = new ArrayList<>();
+	private List<Guide> guides = new ArrayList<>();
 	private MapsData mapsData;
 	private BookingData bookingData;
 
@@ -37,9 +39,9 @@ public class TourismDataService {
 
 	@PostConstruct
 	void loadData() throws IOException {
-		attractions = loadList("data/attractions.json", new TypeReference<List<Attraction>>() {});
-		hotels = loadList("data/hotels.json", new TypeReference<List<Hotel>>() {});
-		guides = loadList("data/guides.json", new TypeReference<List<Guide>>() {});
+		attractions = new ArrayList<>(loadList("data/attractions.json", new TypeReference<List<Attraction>>() {}));
+		hotels = new ArrayList<>(loadList("data/hotels.json", new TypeReference<List<Hotel>>() {}));
+		guides = new ArrayList<>(loadList("data/guides.json", new TypeReference<List<Guide>>() {}));
 		mapsData = loadObject("data/maps.json", MapsData.class);
 		bookingData = loadObject("data/booking.json", BookingData.class);
 	}
@@ -73,6 +75,16 @@ public class TourismDataService {
 		return attractions.stream().filter(a -> a.id().equals(id)).findFirst();
 	}
 
+	public Attraction addAttraction(Attraction attraction) {
+		attractions.removeIf(a -> a.id().equals(attraction.id()));
+		attractions.add(attraction);
+		return attraction;
+	}
+
+	public boolean deleteAttraction(String id) {
+		return attractions.removeIf(a -> a.id().equals(id));
+	}
+
 	public List<String> getAttractionCategories() {
 		return List.of(
 				"All",
@@ -95,6 +107,20 @@ public class TourismDataService {
 		return hotels.stream().filter(h -> h.type().equalsIgnoreCase(type)).toList();
 	}
 
+	public Optional<Hotel> getHotelById(String id) {
+		return hotels.stream().filter(h -> h.id().equals(id)).findFirst();
+	}
+
+	public Hotel addHotel(Hotel hotel) {
+		hotels.removeIf(h -> h.id().equals(hotel.id()));
+		hotels.add(hotel);
+		return hotel;
+	}
+
+	public boolean deleteHotel(String id) {
+		return hotels.removeIf(h -> h.id().equals(id));
+	}
+
 	public List<String> getHotelTypes() {
 		return List.of("All", "Houseboat", "Hotel", "Resort", "Cottage", "Camp / Tent", "Heritage Hotel");
 	}
@@ -107,6 +133,16 @@ public class TourismDataService {
 		return guides.stream().filter(g -> g.id().equals(id)).findFirst();
 	}
 
+	public Guide addGuide(Guide guide) {
+		guides.removeIf(g -> g.id().equals(guide.id()));
+		guides.add(guide);
+		return guide;
+	}
+
+	public boolean deleteGuide(String id) {
+		return guides.removeIf(g -> g.id().equals(id));
+	}
+
 	public List<MapLocation> getMapLocations() {
 		return mapsData.locations();
 	}
@@ -117,5 +153,16 @@ public class TourismDataService {
 
 	public BookingData getBookingData() {
 		return bookingData;
+	}
+
+	public Optional<BookingOption> getBookingOptionById(String id) {
+		return bookingData.options().stream().filter(o -> o.id().equals(id)).findFirst();
+	}
+
+	public List<Hotel> getHotelsByIds(List<String> ids) {
+		if (ids == null || ids.isEmpty()) {
+			return List.of();
+		}
+		return hotels.stream().filter(h -> ids.contains(h.id())).toList();
 	}
 }

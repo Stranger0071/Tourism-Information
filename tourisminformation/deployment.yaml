@@ -14,12 +14,26 @@ spec:
       labels:
         app: tourisminformation
     spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
       containers:
         - name: tourisminformation
           image: tourisminformation-backend:latest
           imagePullPolicy: IfNotPresent
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: false
+            capabilities:
+              drop:
+                - ALL
           ports:
             - containerPort: 8081
+          envFrom:
+            - secretRef:
+                name: tourism-secrets
           env:
             - name: APP_CORS_ALLOWED_ORIGINS
               value: "http://localhost,http://localhost:80,http://127.0.0.1"

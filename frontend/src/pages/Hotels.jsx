@@ -21,7 +21,7 @@ export default function Hotels() {
         <h1>Hotels, houseboats & stays</h1>
         <p>
           A mix of registered houseboats, hotels, and seasonal camps across the valley.
-          Prices are indicative for 2025–26 — confirm directly before booking.
+          Check live availability and prices right here — we monitor each property continuously.
         </p>
       </header>
 

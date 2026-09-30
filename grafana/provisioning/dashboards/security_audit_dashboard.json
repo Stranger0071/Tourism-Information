@@ -1,0 +1,245 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "title": "Failed Logins Over Time",
+      "type": "timeseries",
+      "datasource": {
+        "type": "graphite",
+        "uid": "Graphite"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "Graphite"
+          },
+          "refId": "A",
+          "target": "stats.counters.audit.login.failure.count"
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "Graphite"
+          },
+          "refId": "B",
+          "target": "audit.login.failure.count"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "Failures",
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "description": "Monitors unauthenticated or wrong-password login attempts."
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 2,
+      "title": "Blocked Requests (Rate-Limit Hits)",
+      "type": "timeseries",
+      "datasource": {
+        "type": "graphite",
+        "uid": "Graphite"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "Graphite"
+          },
+          "refId": "A",
+          "target": "stats.counters.audit.rate_limit.blocked.count"
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "Graphite"
+          },
+          "refId": "B",
+          "target": "audit.rate_limit.blocked.count"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "Blocked Count",
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "description": "Tracks HTTP 429 rate limit enforcement on rate-limited endpoints."
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "id": 3,
+      "title": "Access-Denied Events (HTTP 403)",
+      "type": "timeseries",
+      "datasource": {
+        "type": "graphite",
+        "uid": "Graphite"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "Graphite"
+          },
+          "refId": "A",
+          "target": "stats.counters.audit.access.denied.count"
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "Graphite"
+          },
+          "refId": "B",
+          "target": "audit.access.denied.count"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "Forbidden Count",
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "description": "Tracks HTTP 403 Forbidden authorization failure events."
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "id": 4,
+      "title": "Successful Logins",
+      "type": "timeseries",
+      "datasource": {
+        "type": "graphite",
+        "uid": "Graphite"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "Graphite"
+          },
+          "refId": "A",
+          "target": "stats.counters.audit.login.success.count"
+        },
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "Graphite"
+          },
+          "refId": "B",
+          "target": "audit.login.success.count"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "Success Count",
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "description": "Tracks successful authentication events."
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 36,
+  "style": "dark",
+  "tags": [
+    "security",
+    "audit",
+    "graphite"
+  ],
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m"
+    ]
+  },
+  "title": "Security & Audit Dashboard",
+  "uid": "security-audit-dashboard",
+  "version": 1
+}

@@ -139,3 +139,224 @@
   width: 100%;
   justify-content: center;
 }
+
+/* Live availability panel */
+.hotel-availability {
+  width: 100%;
+}
+
+.hotel-avail-btn {
+  width: 100%;
+  justify-content: center;
+}
+
+.hotel-avail-panel {
+  margin-top: 0.85rem;
+  padding: 1rem;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  animation: panelSlideIn 0.25s ease;
+}
+
+.hotel-avail-panel-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+}
+
+.hotel-avail-panel-header strong {
+  display: block;
+  font-size: 0.92rem;
+  color: var(--pine);
+  margin-bottom: 0.15rem;
+}
+
+.hotel-avail-subtitle {
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+  line-height: 1.45;
+}
+
+.hotel-avail-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.hotel-avail-nights-label {
+  display: block;
+  font-size: 0.88rem;
+  margin-bottom: 0.35rem;
+}
+
+.hotel-avail-slider {
+  margin-bottom: 1rem;
+}
+
+.hotel-avail-loading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+  margin-bottom: 0.85rem;
+}
+
+.hotel-avail-result {
+  margin-bottom: 1rem;
+}
+
+.hotel-avail-rooms {
+  font-size: 0.85rem;
+  color: var(--pine);
+  margin: 0.5rem 0 0.75rem;
+}
+
+.hotel-avail-rooms--none {
+  color: var(--ink-muted);
+}
+
+.hotel-avail-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--border);
+}
+
+.hotel-avail-actions .btn-primary {
+  width: 100%;
+  justify-content: center;
+}
+
+.hotel-avail-external {
+  font-size: 0.78rem;
+  text-align: center;
+  color: var(--lake);
+}
+
+.hotel-avail-note {
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+  text-align: center;
+  line-height: 1.45;
+}
+
+.hotel-avail-times {
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+  margin-bottom: 0.65rem;
+}
+
+.hotel-avail-result--refreshing {
+  opacity: 0.85;
+}
+
+.live-monitor-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--pine);
+  background: #e8f3ee;
+  border: 1px solid #b8d9c8;
+  border-radius: 999px;
+  padding: 0.2rem 0.55rem;
+}
+
+.live-checking-label,
+.live-next-check {
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+}
+
+.stay-schedule {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.stay-schedule-row {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.stay-schedule-row--dates {
+  grid-template-columns: 1fr 1fr;
+}
+
+.stay-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.stay-field-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--pine);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.stay-input {
+  width: 100%;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.88rem;
+  background: var(--white);
+  color: var(--ink);
+}
+
+.stay-input:focus {
+  outline: 2px solid rgba(196, 92, 38, 0.25);
+  border-color: var(--saffron);
+}
+
+.stay-input--time {
+  margin-top: 0.15rem;
+}
+
+.stay-input--nights {
+  max-width: 6rem;
+}
+
+.stay-field-hint {
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+}
+
+.stay-schedule-summary {
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+  line-height: 1.5;
+  padding: 0.65rem 0.75rem;
+  background: var(--white);
+  border: 1px dashed var(--border);
+  border-radius: 6px;
+}
+
+@media (max-width: 520px) {
+  .stay-schedule-row--dates {
+    grid-template-columns: 1fr;
+  }
+}
+
+@keyframes panelSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
