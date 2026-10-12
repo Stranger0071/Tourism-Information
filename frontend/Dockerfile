@@ -10,6 +10,9 @@ RUN npm run build
 
 # Runtime stage - Unprivileged Nginx non-root
 FROM nginxinc/nginx-unprivileged:alpine
+USER root
+RUN apk update && apk upgrade --no-cache
+USER 101
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build --chown=101:101 /app/dist /usr/share/nginx/html
 
