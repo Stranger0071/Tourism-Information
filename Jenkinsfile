@@ -2,9 +2,10 @@ pipeline {
     agent any
 
     environment {
-        BACKEND_IMAGE  = 'jk-tourism-backend'
-        FRONTEND_IMAGE = 'jk-tourism-frontend'
-        IMAGE_TAG      = "${env.BUILD_NUMBER ?: 'latest'}"
+        BACKEND_IMAGE    = 'jk-tourism-backend'
+        FRONTEND_IMAGE   = 'jk-tourism-frontend'
+        IMAGE_TAG        = "${env.BUILD_NUMBER ?: 'latest'}"
+        MSYS_NO_PATHCONV = '1'
     }
 
     stages {
@@ -73,10 +74,11 @@ pipeline {
         stage('Security — Trivy Image Scan') {
             steps {
                 sh """
+                    export MSYS_NO_PATHCONV=1
                     if command -v trivy >/dev/null 2>&1; then
                         TRIVY_BIN="trivy"
                     elif docker image inspect aquasec/trivy:latest >/dev/null 2>&1; then
-                        TRIVY_BIN="docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest"
+                        TRIVY_BIN="docker run --rm -v //var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest"
                     else
                         echo "Neither Trivy CLI nor aquasec/trivy Docker image is available on the build agent."
                         exit 1
