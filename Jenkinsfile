@@ -2,10 +2,9 @@ pipeline {
     agent any
 
     environment {
-        BACKEND_IMAGE    = 'jk-tourism-backend'
-        FRONTEND_IMAGE   = 'jk-tourism-frontend'
-        IMAGE_TAG        = "${env.BUILD_NUMBER ?: 'latest'}"
-        MSYS_NO_PATHCONV = '1'
+        BACKEND_IMAGE  = 'jk-tourism-backend'
+        FRONTEND_IMAGE = 'jk-tourism-frontend'
+        IMAGE_TAG      = "${env.BUILD_NUMBER ?: 'latest'}"
     }
 
     stages {
