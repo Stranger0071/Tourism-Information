@@ -169,6 +169,16 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.owasp</groupId>
+				<artifactId>dependency-check-maven</artifactId>
+				<version>12.1.0</version>
+				<configuration>
+					<failBuildOnCVSS>7.0</failBuildOnCVSS>
+					<failOnError>false</failOnError>
+					<autoUpdate>false</autoUpdate>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
