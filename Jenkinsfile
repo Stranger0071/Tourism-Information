@@ -84,10 +84,10 @@ pipeline {
                     fi
 
                     echo "Scanning \${BACKEND_IMAGE}:\${IMAGE_TAG} for HIGH/CRITICAL vulnerabilities..."
-                    \$TRIVY_BIN image --exit-code 1 --severity HIGH,CRITICAL \${BACKEND_IMAGE}:\${IMAGE_TAG}
+                    \$TRIVY_BIN image --timeout 15m --exit-code 1 --severity HIGH,CRITICAL \${BACKEND_IMAGE}:\${IMAGE_TAG}
 
                     echo "Scanning \${FRONTEND_IMAGE}:\${IMAGE_TAG} for HIGH/CRITICAL vulnerabilities..."
-                    \$TRIVY_BIN image --exit-code 1 --severity HIGH,CRITICAL \${FRONTEND_IMAGE}:\${IMAGE_TAG}
+                    \$TRIVY_BIN image --timeout 15m --exit-code 1 --severity HIGH,CRITICAL \${FRONTEND_IMAGE}:\${IMAGE_TAG}
                 """
             }
         }
