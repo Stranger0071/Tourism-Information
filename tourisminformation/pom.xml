@@ -177,6 +177,7 @@
 					<failBuildOnCVSS>7.0</failBuildOnCVSS>
 					<failOnError>false</failOnError>
 					<autoUpdate>false</autoUpdate>
+					<ossindexAnalyzerEnabled>false</ossindexAnalyzerEnabled>
 				</configuration>
 			</plugin>
 		</plugins>

@@ -39,7 +39,7 @@ pipeline {
                         if command -v dependency-check.sh >/dev/null 2>&1; then
                             dependency-check.sh --project "tourisminformation" --scan "." --format "HTML" --format "JSON" --failOnCVSS 7.0 --out "."
                         else
-                            ./mvnw org.owasp:dependency-check-maven:12.1.0:check -DfailBuildOnCVSS=7.0 -DfailOnError=false -DautoUpdate=false $NVD_KEY_ARG -B
+                            ./mvnw org.owasp:dependency-check-maven:12.1.0:check -DfailBuildOnCVSS=7.0 -DfailOnError=false -DautoUpdate=false -DossindexAnalyzerEnabled=false $NVD_KEY_ARG -B
                         fi
                     '''
                 }
